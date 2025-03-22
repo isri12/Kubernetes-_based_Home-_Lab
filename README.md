@@ -17,7 +17,7 @@ This home lab system integrates:
 graph TB
     %% Main Components
     Internet[Internet]
-    Router[Home Router]
+    Router[Home Router/Network Switch]
     
     Laptop[Used Laptop]
     subgraph "Laptop Services"
