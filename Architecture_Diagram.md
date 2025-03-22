@@ -1,3 +1,4 @@
+```mermaid
 graph TB
     %% Main Components
     Internet[Internet]
@@ -39,3 +40,4 @@ graph TB
     class PiHole,HomeAssist,OtherPi raspberry;
     class Internet,Router network;
     class Devices client;
+```
