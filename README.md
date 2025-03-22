@@ -30,6 +30,8 @@ graph TB
     HomeAssist[Raspberry Pi - Home Assistant]
     OtherPi[Raspberry Pi - Future Use]
     
+    HostingerVPS[Hostinger VPS<br>Website]
+    
     Devices[Client Devices<br>TV, Phones, Laptops]
     
     %% Connections
@@ -39,22 +41,26 @@ graph TB
     Router --- HomeAssist
     Router --- OtherPi
     Router --- Devices
+    Internet --- HostingerVPS
     
     %% Service Data Flows
     PiHole -.DNS Filtering.-> Router
     Laptop -.Media Streaming.-> Devices
     HomeAssist -.Smart Home Control.-> Devices
+    Monitoring -.Website Monitoring.-> HostingerVPS
     
     %% Styling
     classDef laptop fill:#326CE5,color:white,stroke-width:2px;
     classDef raspberry fill:#c42525,color:white,stroke-width:2px;
     classDef network fill:#3498db,color:white,stroke-width:2px;
     classDef client fill:#f39c12,color:white,stroke-width:2px;
+    classDef vps fill:#16a085,color:white,stroke-width:2px;
     
     class Laptop,K8s,Monitoring,Media laptop;
     class PiHole,HomeAssist,OtherPi raspberry;
     class Internet,Router network;
     class Devices client;
+    class HostingerVPS vps;
 ```
 
 
@@ -87,6 +93,7 @@ K3s is a lightweight Kubernetes distribution perfect for this environment:
   - Pi-hole statistics
   - Home Assistant devices
   - Media server performance
+  - **Hostinger VPS** (website uptime, performance, resource usage)
 
 ### Media Server
 - **Option 1: Plex** (more polished UI, transcoding capabilities)
@@ -107,6 +114,10 @@ K3s is a lightweight Kubernetes distribution perfect for this environment:
 │   ├── pihole/                # Pi-hole integration scripts
 │   ├── homeassistant/         # Home Assistant integration
 │   └── metrics-exporters/     # Custom metrics collection
+│   ├── hostinger-vps/         # Hostinger VPS monitoring
+│   │   ├── exporters/         # Node exporter configuration
+│   │   ├── dashboards/        # Grafana dashboards for VPS
+│   │   └── alerts/            # Alert rules for VPS monitoring
 ├── scripts/
 │   ├── backup/                # Backup automation
 │   └── maintenance/           # Maintenance utilities
