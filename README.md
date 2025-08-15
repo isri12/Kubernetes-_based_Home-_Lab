@@ -294,3 +294,72 @@ graph TD
     A4 --- B
     A4 --- C
 ,,,
+
+
+
+
+
+# Homelab Architecture (Color-Coded)
+
+```mermaid
+graph TD
+    %% MAIN SERVER
+    subgraph A[Powerful PC - Proxmox]
+        style A fill:#fff3e0,stroke:#ff9800,stroke-width:2px,color:#000
+
+        subgraph Media[Media Services]
+            style Media fill:#fff8e1,stroke:#ffb300,color:#000
+            A1[TrueNAS VM - NAS Storage]
+            A2[Plex Media Server VM - GPU Transcoding]
+        end
+
+        subgraph Infra[Infrastructure & Automation]
+            style Infra fill:#e3f2fd,stroke:#2196f3,color:#000
+            A3[Kubernetes Master Node VM]
+            A5[Docker Playground VM]
+            A6[Terraform + Ansible Control Node]
+        end
+
+        subgraph Monitoring[Monitoring & Analytics]
+            style Monitoring fill:#f1f8e9,stroke:#4caf50,color:#000
+            A4[Prometheus + Grafana VM]
+        end
+
+        subgraph Dev[Development Sandbox]
+            style Dev fill:#f3e5f5,stroke:#9c27b0,color:#000
+            A7[Linux Dev Environment Sandbox VM]
+        end
+    end
+
+    %% MINI-PC
+    subgraph B[Mini-PC - Proxmox or Debian]
+        style B fill:#e3f2fd,stroke:#2196f3,stroke-width:2px,color:#000
+        B1[Pi-hole LXC - Ad Blocking]
+        B2[Website Monitor - Uptime Kuma]
+        B3[Backup Target for Main PC VMs]
+    end
+
+    %% RASPBERRY PI CLUSTER
+    subgraph C[Raspberry Pi Cluster (x4)]
+        style C fill:#ffebee,stroke:#f44336,stroke-width:2px,color:#000
+        C1[Kubernetes Worker Node #1]
+        C2[Kubernetes Worker Node #2]
+        C3[Kubernetes Worker Node #3]
+        C4[Backup Pi-hole or Test Node]
+    end
+
+    %% CONNECTIONS
+    A1 --- A2
+    A1 --- A4
+    A3 --- C1
+    A3 --- C2
+    A3 --- C3
+    A6 --- A3
+    A6 --- B1
+    A6 --- C1
+    A6 --- C2
+    A6 --- C3
+    A4 --- A
+    A4 --- B
+    A4 --- C
+```
