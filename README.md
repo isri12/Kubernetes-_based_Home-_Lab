@@ -13,6 +13,33 @@ This home lab system integrates:
 - Plex/Jellyfin media server
 - Integration with existing Raspberry Pi devices (Pi-hole, Home Assistant)
 
+# Homelab Architecture (Color-Coded)
+
+```mermaid
+graph TD
+    %% MAIN SERVER
+    subgraph A[Powerful PC - Proxmox]
+        style A fill:#fff3e0,stroke:#ff9800,stroke-width:2px,color:#000
+
+        subgraph Media[Media Services]
+            style Media fill:#fff8e1,stroke:#ffb300,color:#000
+            A1[TrueNAS VM - NAS Storage]
+            A2[Plex Media Server VM - GPU Transcoding]
+        end
+
+        subgraph Infra[Infrastructure & Automation]
+            style Infra fill:#e3f2fd,stroke:#2196f3,color:#000
+            A3[Kubernetes Master Node VM]
+            A5[Docker Playground VM]
+            A6[Terraform + Ansible Control Node]
+        end
+
+        subgraph Monitoring[Monitoring & Analytics]
+            style Monitoring fill:#f1f8e9,stroke:#4caf50,color:#000
+            A4[Prometheus + Grafana VM]
+        end
+
+
 ```mermaid
 graph TB
     %% Main Components
