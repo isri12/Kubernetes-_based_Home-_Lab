@@ -204,3 +204,66 @@ Common issues and solutions:
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+
+,,,
+graph TD
+    %% Main Server
+    subgraph A[Powerful PC - Proxmox]
+        style A fill:#ffe0cc,stroke:#ff6600,stroke-width:2px
+        subgraph Media[Media Services]
+            style Media fill:#fff5e6,stroke:#ff9900
+            A1[TrueNAS VM - NAS Storage]
+            A2[Plex Media Server VM - GPU Transcoding]
+        end
+
+        subgraph Infra[Infrastructure & Automation]
+            style Infra fill:#e6f7ff,stroke:#3399ff
+            A3[Kubernetes Master Node VM]
+            A5[Docker Playground VM]
+            A6[Terraform + Ansible Control Node]
+        end
+
+        subgraph Monitoring[Monitoring & Analytics]
+            style Monitoring fill:#f2ffe6,stroke:#66cc33
+            A4[Prometheus + Grafana VM]
+        end
+
+        subgraph Dev[Development Sandbox]
+            style Dev fill:#f9e6ff,stroke:#cc33ff
+            A7[Linux Dev Environment Sandbox VM]
+        end
+    end
+
+    %% Mini-PC
+    subgraph B[Mini-PC - Proxmox or Debian]
+        style B fill:#e6f7ff,stroke:#3399ff,stroke-width:2px
+        B1[Pi-hole LXC - Ad Blocking]
+        B2[Website Monitor - Uptime Kuma]
+        B3[Backup Target for Main PC VMs]
+    end
+
+    %% Raspberry Pi Cluster
+    subgraph C[Raspberry Pi Cluster (x4)]
+        style C fill:#fff0f0,stroke:#cc0000,stroke-width:2px
+        C1[Kubernetes Worker Node #1]
+        C2[Kubernetes Worker Node #2]
+        C3[Kubernetes Worker Node #3]
+        C4[Backup Pi-hole or Test Node]
+    end
+
+    %% Connections
+    A1 --- A2
+    A1 --- A4
+    A3 --- C1
+    A3 --- C2
+    A3 --- C3
+    A6 --- A3
+    A6 --- B1
+    A6 --- C1
+    A6 --- C2
+    A6 --- C3
+    A4 --- A
+    A4 --- B
+    A4 --- C
+,,,
